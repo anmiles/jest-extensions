@@ -2,7 +2,7 @@ import { equals } from './equals';
 
 export { toEqualStructure, toStructure, Structure };
 
-type Structure<T extends Record<any, any>> = { [K in keyof T]: T[K] extends Function ? never : T[K]};
+type Structure<T extends Record<any, any>> = { [K in keyof T as T[K] extends Function ? never : K]: T[K]};
 
 declare global {
 	namespace jest {
@@ -23,7 +23,7 @@ function toEqualStructure<T extends Record<any, any>>(received: T, expected: Str
 function toStructure<T extends Record<any, any>>(obj: T): Structure<T> {
 	const result = {} as Structure<T>;
 
-	for (const key in obj) {
+	for (const key in obj as Structure<T>) {
 		switch (typeof obj[key]) {
 			case 'function':
 				continue;
