@@ -24,7 +24,7 @@ function processItem<TItem extends FSFile<false> | FSDir<false> | FSLink<false>>
 	return files[fullName];
 }
 
-function mockFS(fsTree: FSDir<false>, sep: typeof path.sep): {
+function mockFS(fsTrees: FSDir<false>[], sep: typeof path.sep): {
 	files: Files,
 	mock: {
 		existsSync: typeof fs.existsSync,
@@ -32,7 +32,7 @@ function mockFS(fsTree: FSDir<false>, sep: typeof path.sep): {
 	}
 } {
 	const files: Files = {};
-	processItem(fsTree, sep, files);
+	fsTrees.forEach((fsTree) => processItem(fsTree, sep, files));
 
 	return {
 		files,

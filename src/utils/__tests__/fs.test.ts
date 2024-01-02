@@ -34,7 +34,7 @@ const fsTree: FSDir = {
 describe('fs.utils', () => {
 	describe('mockFS', () => {
 		it('should generate correct files object', () => {
-			const { files } = mockFS(fsTree, '/');
+			const { files } = mockFS([ fsTree ], '/');
 
 			expect(files).toEqual({
 				'D:' : {
@@ -116,7 +116,7 @@ describe('fs.utils', () => {
 		});
 
 		it('should generate correct mock functions', () => {
-			const { mock } = mockFS(fsTree, '/');
+			const { mock } = mockFS([ fsTree ], '/');
 
 			expect(mock.existsSync('D:/subdir')).toBe(true);
 			expect(mock.existsSync('D:/wrongpath')).toBe(false);
@@ -179,6 +179,70 @@ describe('fs.utils', () => {
 			]);
 
 			expect(mock.readdirSync('D:/logs.log')).toEqual([]);
+		});
+
+		it('should generate multiple trees', () => {
+			const fsTrees: FSDir[] = [
+				{
+					name  : 'C:',
+					type  : 'dir',
+					items : [ {
+						name : 'pagefile.sys',
+						type : 'file',
+						size : 1000,
+					} ],
+				},
+
+				{
+					name  : 'D:',
+					type  : 'dir',
+					items : [ {
+						name : 'src',
+						type : 'dir',
+					} ],
+				},
+			];
+
+			expect(mockFS(fsTrees, '\\').files).toEqual({
+				'C:' : {
+					name     : 'C:',
+					fullName : 'C:',
+					type     : 'dir',
+					items    : [
+						{
+							name     : 'pagefile.sys',
+							fullName : 'C:\\pagefile.sys',
+							type     : 'file',
+							size     : 1000,
+						},
+					],
+				},
+				'C:\\pagefile.sys' : {
+					name     : 'pagefile.sys',
+					fullName : 'C:\\pagefile.sys',
+					type     : 'file',
+					size     : 1000,
+				},
+				'D:' : {
+					name     : 'D:',
+					fullName : 'D:',
+					type     : 'dir',
+					items    : [
+						{
+							name     : 'src',
+							fullName : 'D:\\src',
+							type     : 'dir',
+							items    : undefined,
+						},
+					],
+				},
+				'D:\\src' : {
+					name     : 'src',
+					fullName : 'D:\\src',
+					type     : 'dir',
+					items    : undefined,
+				},
+			});
 		});
 	});
 });
