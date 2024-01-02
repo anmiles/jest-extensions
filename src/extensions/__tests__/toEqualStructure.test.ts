@@ -34,7 +34,7 @@ const dstObject = {
 	},
 };
 
-describe('src/lib/toEqualStructure', () => {
+describe('src/extensions/toEqualStructure', () => {
 	describe('matcher', () => {
 		describe('pass', () => {
 			it('should expect object without functions to equal its correct non-function copy', () => {

@@ -16,7 +16,7 @@ expect.extend({ customMatcher });
 
 const object = { key : 'value' };
 
-describe('src/lib/equals', () => {
+describe('src/extensions/equals', () => {
 	describe('matcher', () => {
 		describe('pass', () => {
 			it('should expect object to be equal the same object', () => {

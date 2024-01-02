@@ -18,7 +18,7 @@ function objectCreator(key: string, value: string): Record<string, string> {
 	return { [key] : value };
 }
 
-describe('src/lib/toBeFunction', () => {
+describe('src/extensions/toBeFunction', () => {
 	describe('matcher', () => {
 		describe('pass', () => {
 			it('should expect function to return correct value', () => {

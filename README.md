@@ -95,3 +95,48 @@ import { toStructure } from '@anmiles/jest-extensions';
 
 const objWithoutFunctions = toStructure(obj);
 ```
+
+
+### mockFS
+Converts mock file structure to indexed object and provides mock functions for `fs.existsSync` and `fs.readdirSync` in order to test that mock files
+
+```js
+import fs from 'fs';
+import { FSDir, Files, mockFS } from '@anmiles/jest-extensions';
+
+const fsTree: FSDir = {
+	'D:' : {
+		name     : 'D:',
+		type     : 'dir',
+		items    : [
+			{
+				name     : 'link.lnk',
+				type     : 'link',
+				target   : 'D:/subdir/target.txt',
+			},
+			{
+				name     : 'logs.log',
+				type     : 'file',
+				size     : 10,
+			},
+			{
+				name     : 'subdir',
+				type     : 'dir',
+				items    : [
+					{
+						name     : 'target.txt',
+						type     : 'file',
+						size     : 20,
+					},
+				],
+			}
+		],
+	},
+};
+
+const { files, mock } = mockFS(fsTree, sep);
+const existsSyncSpy = jest.spyOn(fs, 'existsSync').mockImplementation(mock.existsSync);
+const readdirSyncSpy = jest.spyOn(fs, 'readdirSync').mockImplementation(mock.readdirSync);
+
+```
+

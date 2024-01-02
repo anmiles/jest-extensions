@@ -1,3 +1,4 @@
-export * from './lib/equals';
-export * from './lib/toBeFunction';
-export * from './lib/toEqualStructure';
+export * from './extensions/equals';
+export * from './extensions/toBeFunction';
+export * from './extensions/toEqualStructure';
+export * from './utils/fs';
