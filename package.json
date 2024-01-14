@@ -28,11 +28,11 @@
     "test:report:coverage": "nyc report --nycrc-path ./coverage.config.js -t ./coverage --report-dir ./coverage"
   },
   "dependencies": {
-    "@anmiles/logger": "^5.0.0"
+    "@anmiles/logger": "^5.0.1"
   },
   "devDependencies": {
     "@anmiles/eslint-config": "^4.0.0",
-    "@anmiles/tsconfig": "^1.0.9",
+    "@anmiles/tsconfig": "^1.0.10",
     "@types/jest": "^29.5.11",
     "@typescript-eslint/eslint-plugin": "^6.18.1",
     "@typescript-eslint/parser": "^6.18.1",
