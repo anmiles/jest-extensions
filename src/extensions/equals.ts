@@ -20,15 +20,17 @@ function equals<T>(received: T, expected: T) : jest.CustomMatcherResult {
 			message : () => {
 				try {
 					expect(received).not.toEqual(expected);
+					/* istanbul ignore next */
+					return '';
 				} catch (ex) {
-					return ex;
+					return ex as string;
 				}
 			},
 		};
 	} catch (ex) {
 		return {
 			pass    : false,
-			message : () => ex,
+			message : () => ex as string,
 		};
 	}
 }

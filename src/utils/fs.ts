@@ -15,13 +15,11 @@ function processItem<TItem extends FSFile<false> | FSDir<false> | FSLink<false>>
 	const fullName = prefix ? `${prefix}${sep}${item.name}` : item.name;
 
 	if (item.type === 'dir') {
-		const items     = item.items?.map((childItem) => processItem(childItem, sep, files, fullName));
-		files[fullName] = { ...item, items, fullName };
+		const items = item.items?.map((childItem) => processItem(childItem, sep, files, fullName));
+		return files[fullName] = { ...item, items, fullName };
 	} else {
-		files[fullName] = { ...item, fullName };
+		return files[fullName] = { ...item, fullName };
 	}
-
-	return files[fullName];
 }
 
 function mockFS(fsTrees: FSDir<false>[], sep: typeof path.sep): {
@@ -41,16 +39,29 @@ function mockFS(fsTrees: FSDir<false>[], sep: typeof path.sep): {
 			readdirSync : <T extends boolean>(path: fs.PathLike, options?: { withFileTypes?: T; } | Parameters<typeof fs.readdirSync>[1]['encoding']) => {
 				const fsDir = files[path.toString()];
 
-				if (fsDir.type !== 'dir') {
-					return [];
+				if (!fsDir) {
+					throw `Mock directory ${path} does not exist`;
 				}
 
-				const result = fsDir.items?.map((item) => typeof options === 'object' && options?.withFileTypes ? {
-					name           : item.name,
-					isFile         : () => files[item.fullName].type === 'file',
-					isDirectory    : () => files[item.fullName].type === 'dir',
-					isSymbolicLink : () => files[item.fullName].type === 'link',
-				} : item.name) ?? [];
+				if (fsDir.type !== 'dir') {
+					throw `Mock directory ${path} is a ${fsDir.type} in the mock tree`;
+				}
+
+				const result = fsDir.items
+					?.filter((item) => item.fullName in files)
+					.map((item) => {
+						if (typeof options !== 'object' || !options?.withFileTypes) {
+							return item.name;
+						}
+
+						return {
+							name           : item.name,
+							isFile         : () => files[item.fullName]!.type === 'file',
+							isDirectory    : () => files[item.fullName]!.type === 'dir',
+							isSymbolicLink : () => files[item.fullName]!.type === 'link',
+						};
+					})
+					.filter((item) => item) ?? [];
 
 				return result as ReturnType<typeof fs.readdirSync>;
 			},

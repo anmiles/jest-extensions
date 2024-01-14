@@ -1,6 +1,7 @@
-import { equals } from './equals';
+import { equals } from './equals.js';
 
-export { toEqualStructure, toStructure, Structure };
+export { toEqualStructure, toStructure };
+export type { Structure };
 
 type Structure<T extends Record<any, any>> = { [K in keyof T as T[K] extends Function ? never : K]: T[K]};
 

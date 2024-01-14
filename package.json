@@ -8,16 +8,17 @@
     "matcher"
   ],
   "author": "Anatoliy Oblaukhov",
-  "homepage": "https://gitlab.com/anmiles/lib",
-  "repository": "gitlab:anmiles/lib",
+  "homepage": "https://gitlab.com/anmiles/lib/jest-extensions",
+  "repository": "gitlab:anmiles/lib/jest-extensions",
   "license": "MIT",
   "engines": {
     "node": ">=18.14.2"
   },
-  "main": "dist/index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
-    "lint": "eslint --ext .js,.ts .",
+    "build": "rimraf dist && tsc -p ./tsconfig.build.json",
+    "lint": "eslint --ext .js,.cjs,.ts --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest --verbose",
     "test:coverage": "npm test -- --coverage",
@@ -27,17 +28,18 @@
     "test:report:coverage": "nyc report --nycrc-path ./coverage.config.js -t ./coverage --report-dir ./coverage"
   },
   "dependencies": {
-    "@anmiles/logger": "^4.0.1"
+    "@anmiles/logger": "^5.0.0"
   },
   "devDependencies": {
-    "@anmiles/eslint-config": "^2.0.2",
+    "@anmiles/eslint-config": "^4.0.0",
+    "@anmiles/tsconfig": "^1.0.9",
     "@types/jest": "^29.5.11",
-    "@typescript-eslint/eslint-plugin": "^6.17.0",
-    "@typescript-eslint/parser": "^6.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
     "eslint": "^8.56.0",
     "eslint-plugin-align-assignments": "^1.1.2",
     "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jest": "^27.6.1",
+    "eslint-plugin-jest": "^27.6.3",
     "jest": "^29.7.0",
     "nyc": "^15.1.0",
     "rimraf": "^5.0.5",

@@ -1,5 +1,5 @@
 import '../../extensions/toBeFunction';
-import { FSDir, mockFS } from '../fs';
+import { type FSDir, mockFS } from '../fs.js';
 
 const fsTree: FSDir = {
 	name  : 'D:',
@@ -177,8 +177,6 @@ describe('fs.utils', () => {
 					isSymbolicLink : expect.toBeFunction([], false),
 				},
 			]);
-
-			expect(mock.readdirSync('D:/logs.log')).toEqual([]);
 		});
 
 		it('should generate multiple trees', () => {
@@ -243,6 +241,18 @@ describe('fs.utils', () => {
 					items    : undefined,
 				},
 			});
+		});
+
+		it('should throw if trying to read directory that not in the tree', () => {
+			const { mock } = mockFS([ fsTree ], '/');
+
+			expect(() => mock.readdirSync('D:/wrong/path')).toThrow('Mock directory D:/wrong/path does not exist');
+		});
+
+		it('should throw if trying to read directory that is file in the tree', () => {
+			const { mock } = mockFS([ fsTree ], '/');
+
+			expect(() => mock.readdirSync('D:/subdir/target.txt')).toThrow('Mock directory D:/subdir/target.txt is a file in the mock tree');
 		});
 	});
 });

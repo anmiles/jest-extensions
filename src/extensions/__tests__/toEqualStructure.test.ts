@@ -1,4 +1,4 @@
-import { toEqualStructure, toStructure, Structure } from '../toEqualStructure';
+import { toEqualStructure, toStructure, type Structure } from '../toEqualStructure.js';
 
 declare global {
 	namespace jest {

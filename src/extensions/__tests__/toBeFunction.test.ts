@@ -1,4 +1,4 @@
-import { toBeFunction } from '../toBeFunction';
+import { toBeFunction } from '../toBeFunction.js';
 
 declare global {
 	namespace jest {
