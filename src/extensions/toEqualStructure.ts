@@ -1,4 +1,4 @@
-import { equals } from './equals.js';
+import { equals } from './equals';
 
 export { toEqualStructure, toStructure };
 export type { Structure };

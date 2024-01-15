@@ -1,5 +1,5 @@
 import '../../extensions/toBeFunction';
-import { type FSDir, mockFS } from '../fs.js';
+import { FSDir, mockFS } from '../fs';
 
 const fsTree: FSDir = {
 	name  : 'D:',
