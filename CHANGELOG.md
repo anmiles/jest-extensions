@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.0.0](../../tags/v3.0.0) - 2024-01-14
 ### Changed
 - Migrate to ESM
-- Updated dependencies
+- Update dependencies
 
 ## [2.1.1](../../tags/v2.1.1) - 2024-01-02
 ### Added
