@@ -1,6 +1,6 @@
 # @anmiles/jest-extensions
 
-Extend functions for jest
+Extension functions and utils for jest
 
 ----
 
