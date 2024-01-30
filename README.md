@@ -56,7 +56,7 @@ expect(invoker).toHaveBeenCalledWith(expect.toBeFunction((arg1, arg2) => expecte
 
 * default export
 ```js
-import { v } from '@anmiles/jest-extensions';
+import { toBeFunction } from '@anmiles/jest-extensions';
 
 function customMatcher(received: (key: string, value: string) => Record<string, string>, expectedValue: string) : jest.CustomMatcherResult {
 	return toBeFunction(received, [ 'key', 'value' ], { key : expectedValue });
