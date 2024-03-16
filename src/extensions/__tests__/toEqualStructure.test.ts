@@ -1,36 +1,41 @@
-import { toEqualStructure, toStructure, Structure } from '../toEqualStructure';
+import type { Structure } from '../toEqualStructure';
+import { toEqualStructure, toStructure } from '../toEqualStructure';
 
 declare global {
 	namespace jest {
 		interface Matchers<R> {
-			customMatcher<T extends Record<any, any>>(expectedValue: Structure<T>) : R;
+			customMatcher<T extends object>(expectedValue: Structure<T>) : R;
 		}
 	}
 }
 
-function customMatcher<T extends Record<any, any>>(received: T, expected: Structure<T>) : jest.CustomMatcherResult {
+function customMatcher<T extends object>(received: T, expected: Structure<T>) : jest.CustomMatcherResult {
 	return toEqualStructure(received, expected);
 }
 
 expect.extend({ customMatcher });
 
 const srcObject = {
-	key    : 'value',
-	count  : 1,
-	func   : () => 1,
-	nested : {
+	key     : 'value',
+	func    : () => 1,
+	count   : 1,
+	nullKey : null,
+	nested  : {
 		key2   : 'value2',
-		count2 : 2,
 		func   : () => 2,
+		count2 : 2,
+		undef  : undefined,
 	},
 };
 
 const dstObject = {
-	key    : 'value',
-	count  : 1,
-	nested : {
+	key     : 'value',
+	count   : 1,
+	nullKey : null,
+	nested  : {
 		key2   : 'value2',
 		count2 : 2,
+		undef  : undefined,
 	},
 };
 
@@ -48,11 +53,15 @@ describe('src/extensions/toEqualStructure', () => {
 
 		describe('fail', () => {
 			it('should fail when object is not expected to equal its correct non-function copy', () => {
-				expect(() => expect(srcObject).not.toEqualStructure(dstObject)).toThrow();
+				expect(() => {
+					expect(srcObject).not.toEqualStructure(dstObject);
+				}).toThrow();
 			});
 
 			it('should fail when object is expected to equal its incorrect non-function copy', () => {
-				expect(() => expect(srcObject).toEqualStructure({ ...dstObject, newKey : 'newValue' })).toThrow();
+				expect(() => {
+					expect(srcObject).toEqualStructure({ ...dstObject, newKey : 'newValue' });
+				}).toThrow();
 			});
 		});
 

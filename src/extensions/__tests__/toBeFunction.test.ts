@@ -32,11 +32,15 @@ describe('src/extensions/toBeFunction', () => {
 
 		describe('fail', () => {
 			it('should fail when function is not expected to return correct value', () => {
-				expect(() => expect(objectCreator).not.toBeFunction([ 'key', 'value' ], { key : 'value' })).toThrow();
+				expect(() => {
+					expect(objectCreator).not.toBeFunction([ 'key', 'value' ], { key : 'value' });
+				}).toThrow();
 			});
 
 			it('should fail when function is expected to return incorrect value', () => {
-				expect(() => expect(objectCreator).toBeFunction([ 'key', 'value' ], { key2 : 'value2' })).toThrow();
+				expect(() => {
+					expect(objectCreator).toBeFunction([ 'key', 'value' ], { key2 : 'value2' });
+				}).toThrow();
 			});
 		});
 

@@ -30,11 +30,15 @@ describe('src/extensions/equals', () => {
 
 		describe('fail', () => {
 			it('should fail when object is not expected to be equal the same object', () => {
-				expect(() => expect(object).not.equals({ key : 'value' })).toThrow();
+				expect(() => {
+					expect(object).not.equals({ key : 'value' });
+				}).toThrow();
 			});
 
 			it('should fail when object is expected to be equal different object', () => {
-				expect(() => expect(object).equals({ key2 : 'value2' })).toThrow();
+				expect(() => {
+					expect(object).equals({ key2 : 'value2' });
+				}).toThrow();
 			});
 		});
 	});

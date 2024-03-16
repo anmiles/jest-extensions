@@ -1,4 +1,4 @@
-export { equals };
+import '@anmiles/prototypes';
 
 declare global {
 	namespace jest {
@@ -23,17 +23,18 @@ function equals<T>(received: T, expected: T) : jest.CustomMatcherResult {
 					/* istanbul ignore next */
 					return '';
 				} catch (ex) {
-					return ex as string;
+					return Error.parse(ex).message;
 				}
 			},
 		};
 	} catch (ex) {
 		return {
 			pass    : false,
-			message : () => ex as string,
+			message : () => Error.parse(ex).message,
 		};
 	}
 }
 
 expect.extend({ equals });
 
+export { equals };

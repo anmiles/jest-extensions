@@ -1,7 +1,5 @@
 import { equals } from './equals';
 
-export { toBeFunction };
-
 declare global {
 	namespace jest {
 		interface Expect {
@@ -19,3 +17,5 @@ function toBeFunction<P, V>(received: (...args: P[]) => V, args: P[], expectedRe
 }
 
 expect.extend({ toBeFunction });
+
+export { toBeFunction };
