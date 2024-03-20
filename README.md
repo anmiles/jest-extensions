@@ -6,7 +6,7 @@ Extension functions and utils for jest
 
 ## Installation
 
-`npm install @anmiles/jest-extensions`
+`npm install --save-dev @anmiles/jest-extensions`
 
 ## Usage examples
 
