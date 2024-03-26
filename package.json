@@ -27,7 +27,7 @@
 		"test:report:coverage": "nyc report --nycrc-path ./coverage.config.js -t ./coverage --report-dir ./coverage"
 	},
 	"dependencies": {
-		"@anmiles/prototypes": "^10.0.4"
+		"@anmiles/prototypes": "^10.0.5"
 	},
 	"peerDependencies": {
 		"@types/jest": "^29.5.12",
@@ -35,11 +35,11 @@
 		"ts-jest": "^29.1.2"
 	},
 	"devDependencies": {
-		"@anmiles/eslint-config": "^7.1.1",
-		"@anmiles/tsconfig": "^3.0.1",
+		"@anmiles/eslint-config": "^7.1.2",
+		"@anmiles/tsconfig": "^3.0.2",
 		"@stylistic/eslint-plugin": "^1.7.0",
-		"@typescript-eslint/eslint-plugin": "^7.3.1",
-		"@typescript-eslint/parser": "^7.3.1",
+		"@typescript-eslint/eslint-plugin": "^7.4.0",
+		"@typescript-eslint/parser": "^7.4.0",
 		"eslint": "^8.57.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
 		"eslint-plugin-align-assignments": "^1.1.2",
@@ -50,6 +50,6 @@
 		"eslint-plugin-promise": "^6.1.1",
 		"nyc": "^15.1.0",
 		"rimraf": "^5.0.5",
-		"typescript": "^5.4.2"
+		"typescript": "^5.4.3"
 	}
 }
