@@ -14,21 +14,21 @@ Extension functions and utils for jest
 Checks that object equals another object. Actually exposes built-in `toEqual` matcher.
 
 * matcher
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(object).equals(anotherObject);
 ```
 
 * extension
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(spy).toHaveBeenCalledWith(expect.equals(obj));
 ```
 
 * default export
-```js
+```ts
 import { equals } from '@anmiles/jest-extensions';
 
 function customMatcher<T>(received: T, expected: T) : jest.CustomMatcherResult {
@@ -41,21 +41,21 @@ function customMatcher<T>(received: T, expected: T) : jest.CustomMatcherResult {
 Checks that function being called with specified arguments will return expected value
 
 * matcher
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(func).toBeFunction((arg1, arg2) => expectedReturnValue);
 ```
 
 * extension
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(invoker).toHaveBeenCalledWith(expect.toBeFunction((arg1, arg2) => expectedReturnValue));
 ```
 
 * default export
-```js
+```ts
 import { toBeFunction } from '@anmiles/jest-extensions';
 
 function customMatcher(received: (key: string, value: string) => Record<string, string>, expectedValue: string) : jest.CustomMatcherResult {
@@ -67,21 +67,21 @@ function customMatcher(received: (key: string, value: string) => Record<string, 
 Compares objects with structure properties only (without functions). Type of expected object should not consist of any function-like properties.
 
 * matcher
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(obj).toEqualStructure(objWithoutFunctions);
 ```
 
 * extension
-```js
+```ts
 import '@anmiles/jest-extensions';
 
 expect(func).toHaveBeenCalledWith(expect.toEqualStructure(obj));
 ```
 
 * default export
-```js
+```ts
 import { toEqualStructure, Structure } from '@anmiles/jest-extensions';
 
 function customMatcher<T extends Record<any, any>>(received: T, expected: Structure<T>) : jest.CustomMatcherResult {
@@ -90,12 +90,37 @@ function customMatcher<T extends Record<any, any>>(received: T, expected: Struct
 ```
 
 * `toStructure` function
-```js
+```ts
 import { toStructure } from '@anmiles/jest-extensions';
 
 const objWithoutFunctions = toStructure(obj);
 ```
 
+### toMatchFiles
+Reads directory recursively and compares the list of files and their contents with expected object.
+
+* matcher
+```ts
+import '@anmiles/jest-extensions';
+
+expect(dirPath).toMatchFiles({ 'file': 'content', 'subdir/file2': 'content2' });
+```
+
+* extension
+```ts
+import '@anmiles/jest-extensions';
+
+expect(targetDir).toEqual(expect.toMatchFiles({ 'file': 'content', 'subdir/file2': 'content2' }));
+```
+
+* default export
+```ts
+import { toMatchFiles } from '@anmiles/jest-extensions';
+
+function customMatcher<T extends string>(directoryPath: T, expected: Record<T, string>): jest.CustomMatcherResult {
+	return toMatchFiles(directoryPath, expected);
+}
+```
 
 ### mockFS
 _Removed in favor of `mock-fs` package._

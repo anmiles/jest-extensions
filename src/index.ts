@@ -1,5 +1,6 @@
 /* istanbul ignore file */
 
-export * from './extensions/equals';
-export * from './extensions/toBeFunction';
-export * from './extensions/toEqualStructure';
+export * from './extensions/equals.test';
+export * from './extensions/toBeFunction.test';
+export * from './extensions/toEqualStructure.test';
+export * from './extensions/toMatchFiles.test';
