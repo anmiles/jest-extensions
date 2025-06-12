@@ -122,6 +122,27 @@ function customMatcher<T extends string>(directoryPath: T, expected: Record<T, s
 }
 ```
 
+### mockPartial
+Mimics partial type as an underlying type when need to mock object with only part of required properties.
+Do not expects required properties to be specified, but type-check any specified properties to match original type.
+_This is not type-safe and should be used only in tests._
+
+```ts
+import { mockPartial } from '@anmiles/jest-extensions';
+
+type TestType = {
+	requiredStr: string;
+	requiredNum: number;
+	optionalBool?: boolean;
+};
+
+const partial: TestType = mockPartial<TestType>({
+	requiredStr: 'test',
+});
+
+expect(partial).toEqual({ requiredStr: 'test' });
+```
+
 ### mockFS
 _Removed in favor of `mock-fs` package._
 _Refer to [this diff](https://github.com/anmiles/prototypes/commit/db74a55b223169b99284aa4ff27c7adf1629ff1b#diff-bbb8ca3bbb668a3e236b87fda1f06d7a41dbeed055dbfe6bf1892d7f4fefe49eL433) for example of replacement._
