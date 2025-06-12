@@ -136,11 +136,23 @@ type TestType = {
 	optionalBool?: boolean;
 };
 
-const partial: TestType = mockPartial<TestType>({
+// Valid: only one required property specified, but specified correctly
+const partial1: TestType = mockPartial<TestType>({
 	requiredStr: 'test',
 });
 
-expect(partial).toEqual({ requiredStr: 'test' });
+// Valid: no required properties specified
+const partial2: TestType = mockPartial<TestType>({});
+
+// Not valid: unknown properties specified
+const partial3: TestType = mockPartial<TestType>({
+	unknownProp: 'value',
+});
+
+// Not valid: known properties of wrong type specified 
+const partial3: TestType = mockPartial<TestType>({
+	requiredStr: 5,
+});
 ```
 
 ### mockFS
