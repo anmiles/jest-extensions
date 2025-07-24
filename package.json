@@ -1,6 +1,6 @@
 {
 	"name": "@anmiles/jest-extensions",
-	"version": "6.1.1",
+	"version": "6.1.2",
 	"description": "Extension functions and utils for jest",
 	"keywords": [
 		"jest",
