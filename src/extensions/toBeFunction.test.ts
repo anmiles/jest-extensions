@@ -11,7 +11,7 @@ declare global {
 	}
 }
 
-export function toBeFunction<P, V>(received: (...args: P[])=> V, args: P[], expectedReturnValue: V): jest.CustomMatcherResult {
+export function toBeFunction<P, V>(received: (...args: P[]) => V, args: P[], expectedReturnValue: V): jest.CustomMatcherResult {
 	const receivedReturnValue = received(...args);
 	return equals(receivedReturnValue, expectedReturnValue);
 }

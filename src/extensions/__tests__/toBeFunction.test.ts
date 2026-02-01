@@ -8,7 +8,7 @@ declare global {
 	}
 }
 
-function customMatcher(received: (key: string, value: string)=> Record<string, string>, expectedValue: string): jest.CustomMatcherResult {
+function customMatcher(received: (key: string, value: string) => Record<string, string>, expectedValue: string): jest.CustomMatcherResult {
 	return toBeFunction(received, [ 'key', 'value' ], { key: expectedValue });
 }
 
